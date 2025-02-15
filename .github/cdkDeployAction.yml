@@ -47,5 +47,4 @@ jobs:
       - name: Run CDK Deployment
         run: |
           cd cdk
-          cdk synth
           cdk deploy --require-approval never

@@ -29,7 +29,7 @@ This is an **Incident/Service Request Admin App** that allows users to create, v
 
 1. Clone the repository:
    ```sh
-   git clone <repository_url>
+   git clone https://github.com/mananlodhia1/incident-reg.git
    cd backend
    ```
 2. Install dependencies:
