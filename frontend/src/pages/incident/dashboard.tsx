@@ -1,7 +1,7 @@
 import { SearchInput } from "../../components/searchInput";
 import { getItems } from "../../services/actions/actions";
 import { useAppDispatch, useAppSelector } from "../../reduxLibrary/hooks";
-import {  Table } from "flowbite-react";
+import { Table } from "flowbite-react";
 import { useEffect, useState } from "react";
 import ActionModal from "../../components/actionModal";
 import { Add } from "../../components/icons";
@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [data, setData] = useState<IncidentModel[]>([]);
   const [search, setSearch] = useState("");
   const itemData = useAppSelector((itemData) => itemData.items.items.Items);
-  
+
   useEffect(() => {
     dispatch(getItems()).then(({ status }: any) => {
       if (status === 200) {
@@ -39,7 +39,7 @@ export default function Dashboard() {
         } else {
           setData(itemData);
         }
-      } else {  
+      } else {
         setData(itemData);
       }
     }
@@ -58,7 +58,6 @@ export default function Dashboard() {
           <SearchInput label="Search" onValueChange={handleInputChange} />
         </div>
         <div className="flex gap-2">
-  
           <ActionModal
             title="Add Incident"
             btnStyle="primary"
@@ -72,10 +71,9 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="py-2 overflow-x-auto">
- 
         <Table hoverable>
           <Table.Head>
-          <Table.HeadCell>Id</Table.HeadCell>
+            <Table.HeadCell>Id</Table.HeadCell>
             <Table.HeadCell>Name</Table.HeadCell>
             <Table.HeadCell>Severity</Table.HeadCell>
             <Table.HeadCell>Date reported</Table.HeadCell>
@@ -94,7 +92,6 @@ export default function Dashboard() {
                   key={index}
                   className="dark:border-gray-700 dark:bg-gray-800"
                 >
-              
                   <Table.Cell>#{item.id}</Table.Cell>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {item.name}
@@ -102,7 +99,7 @@ export default function Dashboard() {
                   <Table.Cell>{item.severity}</Table.Cell>
                   <Table.Cell>{formatDate(item.createdAt)}</Table.Cell>
                   <Table.Cell>{item.reporterName}</Table.Cell>
-                   <Table.Cell>{formatDate(item.resolutionDate)}</Table.Cell>
+                  <Table.Cell>{formatDate(item.resolutionDate)}</Table.Cell>
 
                   <Table.Cell className="flex justify-end">
                     <div className="flex gap-1">
@@ -117,19 +114,21 @@ export default function Dashboard() {
                       >
                         Details
                       </CustomButton>
-                      <ActionModal
-                        btnStyle="secondary"
-                        title="Delete Incident"
-                        content={
-                          <DeleteIncident
-                            closeModal={function (): void {}}
-                            name={item.name}
-                            id={item.id}
-                            media={item.media}
-                          />
-                        }
-                        icon={<>Delete</>}
-                      />
+                      {localStorage.username === item.reporterName.toLocaleLowerCase() && (
+                        <ActionModal
+                          btnStyle="secondary"
+                          title="Delete Incident"
+                          content={
+                            <DeleteIncident
+                              closeModal={function (): void {}}
+                              name={item.name}
+                              id={item.id}
+                              media={item.media}
+                            />
+                          }
+                          icon={<>Delete</>}
+                        />
+                      )}
                     </div>
                   </Table.Cell>
                 </Table.Row>

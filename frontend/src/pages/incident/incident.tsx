@@ -5,12 +5,15 @@ import { getSingleItem } from "../../services/actions/actions";
 import { useLoading } from "../../hooks/useLoading";
 import { useSearchParams } from "react-router-dom";
 import { CustomTitle } from "../../components/customTitle";
-import { DataRow, MediaComponent } from "../../components/incident/incidentTable";
+import {
+  DataRow,
+  MediaComponent,
+} from "../../components/incident/incidentTable";
 import { formatDate } from "../../utilities/helper";
 import CustomBreadcrumb from "../../components/breadcrumbs";
 import { ProductSkeleton } from "../../components/incident/skeleton";
 import ActionModal from "../../components/actionModal";
-import {  ResponseToast } from "../../components/responseElements";
+import { ResponseToast } from "../../components/responseElements";
 import { IncidentModel } from "../../models/incidentModel";
 import { DeleteIncident } from "./deleteIncident";
 
@@ -36,7 +39,7 @@ export default function Product() {
 
   return (
     <div className="px-5">
-      <ResponseToast/>
+      <ResponseToast />
       {data && !isLoading ? (
         <>
           <div className="sm:flex justify-between bg-fiord-100 p-4 rounded-lg">
@@ -44,7 +47,10 @@ export default function Product() {
               paths={[
                 {
                   name: (
-                    <CustomTitle size="sm" customStyle="m-0 text-lightViolet-700">
+                    <CustomTitle
+                      size="sm"
+                      customStyle="m-0 text-lightViolet-700"
+                    >
                       #{data.id}
                     </CustomTitle>
                   ),
@@ -53,19 +59,20 @@ export default function Product() {
             />
 
             <div className="xs:flex gap-4">
-          
-              <ActionModal
-                title="Delete product"
-                content={
-                  <DeleteIncident
-                    closeModal={function (): void {}}
-                    name={data.name}
-                    id={data.id}
-                    media={data.media}
-                  />
-                }
-                icon={<>Delete</>}
-              />
+              {localStorage.username === data.reporterName.toLocaleLowerCase() && (
+                <ActionModal
+                  title="Delete product"
+                  content={
+                    <DeleteIncident
+                      closeModal={function (): void {}}
+                      name={data.name}
+                      id={data.id}
+                      media={data.media}
+                    />
+                  }
+                  icon={<>Delete</>}
+                />
+              )}
             </div>
           </div>
           <div className="mt-6 border-t border-gray-100 mx-5">
@@ -74,12 +81,15 @@ export default function Product() {
               <DataRow label="Severity" value={data.severity} />
               <DataRow label="Description" value={data.description} />
               <DataRow label="Date added" value={formatDate(data.createdAt)} />
-              <DataRow label="Resolution Date" value={formatDate(data.resolutionDate)} />
+              <DataRow
+                label="Resolution Date"
+                value={formatDate(data.resolutionDate)}
+              />
               <DataRow label="Location" value={data.location} />
               <DataRow label="Contact" value={data.contact} />
               <DataRow label="Reported by" value={data.reporterName} />
 
-              { data.media && data.media.length > 0 && (
+              {data.media && data.media.length > 0 && (
                 <MediaComponent label="Attachments" mediaItems={data.media} />
               )}
             </dl>
