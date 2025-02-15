@@ -4,7 +4,6 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import * as path from "path";
 
 export class CdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -16,10 +15,10 @@ export class CdkStack extends cdk.Stack {
       },
     });
 
-    // Generate an SSH Key Pair
-    const keyPair = new ec2.CfnKeyPair(this, "keyPair", {
-      keyName: "my-ec2-keypair",
-    });
+      // Generate an SSH Key Pair
+      const keyPair = new ec2.CfnKeyPair(this, 'keyPair', {
+        keyName: 'my-ec2-keypair',
+      });
 
     const vpc = ec2.Vpc.fromLookup(this, "VPC", {
       isDefault: true,
@@ -36,9 +35,10 @@ export class CdkStack extends cdk.Stack {
     securityGroup.addIngressRule(
       ec2.Peer.anyIpv4(),
       ec2.Port.tcp(22),
-      "Allow SSH traffic from anywhere"
+      'Allow SSH traffic from anywhere'
     );
 
+  
     securityGroup.addIngressRule(
       ec2.Peer.anyIpv4(),
       ec2.Port.tcp(5001),
@@ -49,19 +49,19 @@ export class CdkStack extends cdk.Stack {
     const ec2Instance = new ec2.Instance(this, "incident-eC2", {
       instanceType: new ec2.InstanceType("t2.micro"),
       machineImage: ec2.MachineImage.genericLinux({
-        "ap-southeast-2": "ami-0b5f6fff50005beae",
+        'ap-southeast-2': 'ami-0b5f6fff50005beae', 
       }),
       vpc: vpc,
       securityGroup: securityGroup,
       vpcSubnets: {
-        subnetType: ec2.SubnetType.PUBLIC,
+        subnetType: ec2.SubnetType.PUBLIC, 
       },
-      associatePublicIpAddress: true, // Enable public IP assignment
-      keyName: keyPair.keyName,
+      associatePublicIpAddress: true,  // Enable public IP assignment
+      keyName: keyPair.keyName, 
       blockDevices: [
         {
-          deviceName: "/dev/xvda", // Default root device name
-          volume: ec2.BlockDeviceVolume.ebs(30), // Set the volume size to 30 GB
+          deviceName: '/dev/xvda',  // Default root device name
+          volume: ec2.BlockDeviceVolume.ebs(30),  // Set the volume size to 30 GB
         },
       ],
     });
@@ -72,7 +72,7 @@ export class CdkStack extends cdk.Stack {
       autoDeleteObjects: true,
     });
 
-    // Deploy app files to the S3 bucket
+    // Deploy your app files (e.g., backend.zip) to the S3 bucket
     new s3deployment.BucketDeployment(this, "DeployApp", {
       sources: [
         s3deployment.Source.asset(
