@@ -77,7 +77,7 @@ export class CdkStack extends cdk.Stack {
     new s3deployment.BucketDeployment(this, "DeployApp", {
       sources: [
         s3deployment.Source.asset(
-          path.join(__dirname, 'backend.zip')
+          "../../backend.zip"
         ),
       ],
       destinationBucket: s3Bucket,
