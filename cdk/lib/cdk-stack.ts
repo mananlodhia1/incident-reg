@@ -4,6 +4,7 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3deployment from "aws-cdk-lib/aws-s3-deployment";
 import * as s3 from "aws-cdk-lib/aws-s3";
+import * as path from 'path';
 
 export class CdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -72,11 +73,13 @@ export class CdkStack extends cdk.Stack {
       autoDeleteObjects: true,
     });
 
+    const backendZipPath = path.join(__dirname, '../backend.zip');
+
     // Deploy app files to the S3 bucket
     new s3deployment.BucketDeployment(this, "DeployApp", {
       sources: [
         s3deployment.Source.asset(
-          "../../backend.zip"
+          backendZipPath
         ),
       ],
       destinationBucket: s3Bucket,
