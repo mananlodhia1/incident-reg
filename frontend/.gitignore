@@ -1,0 +1,14 @@
+# Dependency directories
+node_modules/
+
+# Build output
+/dist/
+
+# IDE/Editor specific files
+.vscode/
+
+# macOS specific files
+.DS_Store
+
+# Log files
+*.log

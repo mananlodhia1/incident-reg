@@ -1,0 +1,35 @@
+/*------Color Pallet------*/
+$theme: theme("colors.lightViolet.700");
+$theme-yellow: theme("colors.softLavender.50");
+$primary-light: theme("colors.pureWhite.200");
+$secondary-light: #f7f7f7;
+$primary-dark: theme("colors.darkSlate.500");
+$secondary-dark: #23272a;
+$fnt-muted: #6c757d;
+
+/*------Font------*/
+$size-sm: 0.75rem;
+$size-md: 0.875rem;
+$size-lg: 1.2rem;
+$font-header: "Poppins", "Roboto", "sans-serif", Arial, Helvetica;
+$font-body: "Roboto", Arial, sans-serif, Helvetica;
+
+/*------Mixins------*/
+@mixin font($fntSize, $fntW, $lineH, $letterSpacing) {
+  font-size: $fntSize;
+  font-weight: $fntW !important;
+  line-height: $lineH !important;
+  letter-spacing: $letterSpacing !important;
+}
+@mixin btn-style($bgColor, $color, $border, $fw) {
+  background-color: $bgColor !important;
+  color: $color !important;
+  border: $border !important;
+  font-weight: $fw !important;
+}
+/*------Placeholder------*/
+%title {
+  font-family: $font-header;
+  display: block;
+  margin-bottom: 1rem;
+}
