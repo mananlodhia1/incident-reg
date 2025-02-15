@@ -55,4 +55,5 @@ jobs:
       - name: Run CDK Deployment
         run: |
           cd cdk
-          cdk deploy --require-approval never
+          ls -l
+          cdk deploy --require-approval never backendZipPath=../backend.zip
