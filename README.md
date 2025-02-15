@@ -60,8 +60,8 @@ This is an **Incident/Service Request Admin App** that allows users to create, v
 
 AWS Cognito is used for authentication. You can use the following credentials for testing:
 
-- **Username**: manan
-- **Password**: incidentRegPw!1
+- **Username**: dataFoundryAdmin
+- **Password**: jevqum-vIkfet-4dywbi
 
 ### Why AWS Cognito?
 
