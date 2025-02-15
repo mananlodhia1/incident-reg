@@ -73,13 +73,11 @@ export class CdkStack extends cdk.Stack {
       autoDeleteObjects: true,
     });
 
-    const backendZipPath = path.join(__dirname, '../backend.zip');
-
     // Deploy app files to the S3 bucket
     new s3deployment.BucketDeployment(this, "DeployApp", {
       sources: [
         s3deployment.Source.asset(
-          backendZipPath
+          path.join(__dirname, 'backend.zip')
         ),
       ],
       destinationBucket: s3Bucket,

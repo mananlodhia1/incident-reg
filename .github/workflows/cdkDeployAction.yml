@@ -41,10 +41,12 @@ jobs:
 
       - name: Zip Backend Folder
         run: |
-          cd backend
-          zip -r ../backend.zip .
-          # Check if the backend.zip file was created successfully
-          ls -l ../backend.zip
+            cd backend
+            zip -r ../backend.zip .
+            # Move the zip file to the cdk directory
+            mv ../backend.zip ../cdk/
+            ls -l ../cdk/backend.zip  # Verify the file is moved correctly
+        
 
       - name: Install Dependencies
         run: |
