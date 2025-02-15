@@ -43,6 +43,8 @@ jobs:
         run: |
           cd backend
           zip -r ../backend.zip .
+          # Check if the backend.zip file was created successfully
+          ls -l ../backend.zip
 
       - name: Install Dependencies
         run: |
@@ -53,4 +55,4 @@ jobs:
       - name: Run CDK Deployment
         run: |
           cd cdk
-          cdk deploy --require-approval never
+          cdk deploy --require-approval never --context backendZipPath=../backend.zip
