@@ -1,5 +1,5 @@
 # Incident/Service Request Admin App
-[Live app](https://main.d33vt77y6gog2p.amplifyapp.com){:target="_blank"}
+<a href="https://main.d33vt77y6gog2p.amplifyapp.com" target="_blank">Live app</a>
 ## Overview
 
 This is an **Incident/Service Request Admin App** that allows users to create, view, and delete incidents. The application is built with the following stack:
